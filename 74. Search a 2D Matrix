@@ -1,0 +1,28 @@
+bool searchMatrix(int** matrix, int matrixSize, int* matrixColSize, int target) {
+    int rows = matrixSize;
+    int cols = matrixColSize[0];
+
+    // Treat the 2D matrix like one long sorted 1D list from index 0 to (rows * cols - 1)
+    int left = 0;
+    int right = (rows * cols) - 1;
+
+    while (left <= right) {
+        int mid = (left + right) / 2;
+
+        // Convert the 1D middle index back into 2D row and column coordinates
+        int row = mid / cols;
+        int col = mid % cols;
+
+        if (matrix[row][col] == target) {
+            return true;  // Found the target!
+        } 
+        else if (matrix[row][col] < target) {
+            left = mid + 1;   // Target must be in the right half
+        } 
+        else {
+            right = mid - 1;  // Target must be in the left half
+        }
+    }
+
+    return false;  // Checked everything and did not find the target
+}
