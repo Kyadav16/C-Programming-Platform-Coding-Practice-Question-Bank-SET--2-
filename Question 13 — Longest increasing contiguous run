@@ -1,0 +1,56 @@
+#include <stdio.h>
+
+// Function to find the length of the longest contiguous strictly increasing subarray
+int longestIncreasingRun(int n, long long arr[]) {
+    // Boundary check: if the array is empty, the maximum run length is 0
+    if (n <= 0) {
+        return 0;
+    }
+
+    // Any single element by itself is an increasing run of length 1
+    int currentRun = 1;
+    int maxRun = 1;
+
+    // Start from the second element (index 1) and compare each element with the previous one
+    for (int i = 1; i < n; i++) {
+        if (arr[i] > arr[i - 1]) {
+            // Strictly increasing: extend the current run
+            currentRun = currentRun + 1;
+
+            // Update maxRun if our current streak is a new record
+            if (currentRun > maxRun) {
+                maxRun = currentRun;
+            }
+        } else {
+            // Streak broken (equal or smaller): reset current run back to 1
+            currentRun = 1;
+        }
+    }
+
+    return maxRun;
+}
+
+int main() {
+    int n;
+
+    // Read the number of elements n
+    scanf("%d", &n);
+
+    // Boundary check: if n <= 0, no elements to read
+    if (n <= 0) {
+        printf("0\n");
+        return 0;
+    }
+
+    // Create a 1D array of size n and read all n integers
+    long long arr[n];
+    for (int i = 0; i < n; i++) {
+        scanf("%lld", &arr[i]);
+    }
+
+    // Call the function and print the longest run length
+    int result = longestIncreasingRun(n, arr);
+    printf("%d\n", result);
+
+    return 0;
+}
