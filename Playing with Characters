@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+#define MAX_LEN 100
+
+int main() 
+{
+    char ch;
+    char s[MAX_LEN];
+    char sen[MAX_LEN];
+
+    // Read a single character
+    scanf("%c", &ch);
+
+    // Read a single word (string without spaces)
+    scanf("%s", s);
+
+    // Clear the leftover newline character in the input buffer before reading the sentence
+    scanf("\n");
+
+    // Read a full line/sentence including spaces until a newline
+    scanf("%[^\n]%*c", sen);
+
+    // Print character, string, and sentence on separate lines
+    printf("%c\n", ch);
+    printf("%s\n", s);
+    printf("%s\n", sen);
+
+    return 0;
+}
