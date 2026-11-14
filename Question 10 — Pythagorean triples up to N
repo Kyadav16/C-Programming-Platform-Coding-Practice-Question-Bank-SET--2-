@@ -1,0 +1,37 @@
+#include <stdio.h>
+
+// Function to find and print all Pythagorean triples 1 <= a < b < c <= N
+void printPythagoreanTriples(long long N) {
+    int found = 0; // Flag to track if we find at least one triple
+
+    // Loop 'a' from 1 up to N
+    for (long long a = 1; a <= N; a++) {
+        // Loop 'b' starting at a + 1 so that a < b is always true
+        for (long long b = a + 1; b <= N; b++) {
+            // Loop 'c' starting at b + 1 so that b < c is always true
+            for (long long c = b + 1; c <= N; c++) {
+                if ((a * a) + (b * b) == (c * c)) {
+                    printf("%lld %lld %lld\n", a, b, c);
+                    found = 1; // Mark that we found at least one triple
+                }
+            }
+        }
+    }
+
+    // If the loops finished and we never found a single triple, print None
+    if (found == 0) {
+        printf("None\n");
+    }
+}
+
+int main() {
+    long long N;
+
+    // Read N from the user
+    scanf("%lld", &N);
+
+    // Call the function to print all valid triples or None
+    printPythagoreanTriples(N);
+
+    return 0;
+}
