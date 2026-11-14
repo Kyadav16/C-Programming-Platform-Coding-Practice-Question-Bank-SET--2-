@@ -1,0 +1,25 @@
+bool isAnagram(char* s, char* t) {
+    int count[26] = {0};
+    int i = 0;
+
+    // Tally character frequencies simultaneously while both strings have characters
+    while (s[i] != '\0' && t[i] != '\0') {
+        count[s[i] - 'a']++;
+        count[t[i] - 'a']--;
+        i++;
+    }
+
+    // If one string is longer than the other, they cannot be anagrams
+    if (s[i] != '\0' || t[i] != '\0') {
+        return false;
+    }
+
+    // Verify all character counts balanced out to zero
+    for (int j = 0; j < 26; j++) {
+        if (count[j] != 0) {
+            return false;
+        }
+    }
+
+    return true;
+}
