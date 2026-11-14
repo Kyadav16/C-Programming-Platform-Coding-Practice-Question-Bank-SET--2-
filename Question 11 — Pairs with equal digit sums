@@ -1,0 +1,61 @@
+#include <stdio.h>
+
+// Helper function to calculate the sum of digits of a number
+int digitSum(long long num) {
+    // Safety check: if a negative number is ever tested, make it positive
+    if (num < 0) {
+        num = -num;
+    }
+
+    int sum = 0;
+
+    // Extract the last digit using % 10, add it to sum, then remove it using / 10
+    while (num > 0) {
+        sum = sum + (num % 10);
+        num = num / 10;
+    }
+
+    return sum;
+}
+
+// Function to count index pairs (i < j) that have the same digit sum
+int countEqualDigitSumPairs(int n, long long arr[]) {
+    int count = 0;
+
+    // Outer loop picks the first number at index i
+    for (int i = 0; i < n; i++) {
+        // Inner loop picks the second number at index j (always after i)
+        for (int j = i + 1; j < n; j++) {
+            if (digitSum(arr[i]) == digitSum(arr[j])) {
+                count = count + 1;
+            }
+        }
+    }
+
+    return count;
+}
+
+int main() {
+    int n;
+
+    // Read the number of elements n
+    scanf("%d", &n);
+
+    // Boundary check: need at least 2 numbers to form a pair
+    if (n < 2) {
+        printf("0\n");
+        return 0;
+    }
+
+    // Create an array of size n and read all n integers
+    long long arr[n];
+    for (int i = 0; i < n; i++) {
+        scanf("%lld", &arr[i]);
+    }
+
+    // Call the function and print the total matching pairs
+    int result = countEqualDigitSumPairs(n, arr);
+    printf("%d\n", result);
+
+    return 0;
+}
