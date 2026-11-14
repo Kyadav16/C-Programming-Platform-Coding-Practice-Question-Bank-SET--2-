@@ -1,0 +1,26 @@
+bool isPalindrome(char* s) {
+    int left = 0;
+    int right = strlen(s) - 1;
+
+    while (left < right) {
+        // Advance left pointer until it hits an alphanumeric character
+        while (left < right && !isalnum((unsigned char)s[left])) {
+            left++;
+        }
+
+        // Move right pointer backward until it hits an alphanumeric character
+        while (left < right && !isalnum((unsigned char)s[right])) {
+            right--;
+        }
+
+        // Compare lowercase versions of both alphanumeric characters
+        if (tolower((unsigned char)s[left]) != tolower((unsigned char)s[right])) {
+            return false;
+        }
+
+        left++;
+        right--;
+    }
+
+    return true;
+}
