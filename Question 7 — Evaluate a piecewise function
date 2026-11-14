@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+// Function to evaluate the piecewise function f(x)
+long long evaluateFunction(long long x) {
+    if (x < 0) {
+        return (x * x) + (2 * x) + 1;
+    } 
+    else if (x < 10) {
+        // Because we already checked x < 0, reaching here automatically means 0 <= x < 10
+        return (3 * x) + 2;
+    } 
+    else {
+        // Reaching here automatically means x >= 10
+        return (5 * x) - 7;
+    }
+}
+
+int main() {
+    long long x;
+
+    // Read x from the user
+    scanf("%lld", &x);
+
+    // Call the function and print f(x)
+    long long result = evaluateFunction(x);
+    printf("%lld\n", result);
+
+    return 0;
+}
