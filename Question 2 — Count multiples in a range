@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+// Function to count positive integers from 1 through n divisible by k
+int countMultiples(int n, int k) {
+    // Safety check: if k is 0 or negative, or n is less than 1, there are 0 positive multiples
+    if (k <= 0 || n < 1) {
+        return 0;
+    }
+
+    // Integer division automatically drops the decimal remainder and gives the exact count
+    return n / k;
+}
+
+int main() {
+    int n, k;
+
+    // Read n and k from the user
+    scanf("%d %d", &n, &k);
+
+    // Call the function and print the result
+    int result = countMultiples(n, k);
+    printf("%d\n", result);
+
+    return 0;
+}
