@@ -1,0 +1,69 @@
+#include <stdio.h>
+
+// Function to find and print the first saddle point in row-major order
+// A saddle point is the minimum in its row AND the maximum in its column
+void findSaddlePoint(int r, int c, long long matrix[r][c]) {
+    // Loop through every cell in row-major order (row i, then column j)
+    for (int i = 0; i < r; i++) {
+        for (int j = 0; j < c; j++) {
+            long long currentVal = matrix[i][j];
+            int isRowMin = 1;
+            int isColMax = 1;
+
+            // Condition 1: Check if currentVal is the minimum in row i
+            for (int col = 0; col < c; col++) {
+                if (matrix[i][col] < currentVal) {
+                    isRowMin = 0; // Found something strictly smaller in the same row
+                    break;
+                }
+            }
+
+            // Condition 2: Only check the column if Condition 1 passed
+            if (isRowMin) {
+                for (int row = 0; row < r; row++) {
+                    if (matrix[row][j] > currentVal) {
+                        isColMax = 0; // Found something strictly larger in the same column
+                        break;
+                    }
+                }
+            }
+
+            // If both conditions hold, we found the first row-major saddle point!
+            if (isRowMin && isColMax) {
+                printf("%d %d %lld\n", i, j, currentVal);
+                return;
+            }
+        }
+    }
+
+    // Checked every cell and found no saddle point
+    printf("None\n");
+}
+
+int main() {
+    int r, c;
+
+    // Read the number of rows (r) and columns (c)
+    if (scanf("%d %d", &r, &c) != 2) {
+        return 0;
+    }
+
+    // Boundary check: invalid matrix dimensions
+    if (r <= 0 || c <= 0) {
+        printf("None\n");
+        return 0;
+    }
+
+    // Create the r x c matrix and read all elements
+    long long matrix[r][c];
+    for (int i = 0; i < r; i++) {
+        for (int j = 0; j < c; j++) {
+            scanf("%lld", &matrix[i][j]);
+        }
+    }
+
+    // Call the function to find and print the saddle point
+    findSaddlePoint(r, c, matrix);
+
+    return 0;
+}
