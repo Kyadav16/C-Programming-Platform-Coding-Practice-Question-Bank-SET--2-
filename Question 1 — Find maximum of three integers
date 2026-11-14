@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+// Function to find and return the largest of three integers
+int maxOfThree(int a, int b, int c) {
+    // Assume 'a' is the largest to start
+    int max = a;
+
+    // If 'b' is bigger than our current max, update max
+    if (b > max) {
+        max = b;
+    }
+
+    // If 'c' is bigger than our current max, update max
+    if (c > max) {
+        max = c;
+    }
+
+    return max;
+}
+
+int main() {
+    int a, b, c;
+
+    // Read three space-separated integers from the user
+    scanf("%d %d %d", &a, &b, &c);
+
+    // Call the function and print the result
+    int result = maxOfThree(a, b, c);
+    printf("%d\n", result);
+
+    return 0;
+}
