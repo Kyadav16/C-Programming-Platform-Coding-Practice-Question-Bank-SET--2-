@@ -1,0 +1,28 @@
+void setZeroes(int** matrix, int matrixSize, int* matrixColSize) {
+    int rows = matrixSize;
+    int cols = matrixColSize[0];
+
+    // Create two simple tracker arrays: one for rows, one for columns
+    // 0 means "keep normal", 1 means "turn this entire row/column into 0"
+    int zeroRow[200] = {0};
+    int zeroCol[200] = {0};
+
+    // Step 1: Scan the matrix to find where the original 0s are
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (matrix[i][j] == 0) {
+                zeroRow[i] = 1;  // Mark row i
+                zeroCol[j] = 1;  // Mark column j
+            }
+        }
+    }
+
+    // Step 2: Go through the matrix again and set marked rows/columns to 0
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (zeroRow[i] == 1 || zeroCol[j] == 1) {
+                matrix[i][j] = 0;
+            }
+        }
+    }
+}
