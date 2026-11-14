@@ -1,0 +1,70 @@
+#include <stdio.h>
+
+// Function to count cells that are strictly greater than all existing orthogonal neighbors
+int countLocalPeaks(int r, int c, long long matrix[r][c]) {
+    int peakCount = 0;
+
+    // Visit every cell (i, j) in the r x c matrix
+    for (int i = 0; i < r; i++) {
+        for (int j = 0; j < c; j++) {
+            long long current = matrix[i][j];
+            int isPeak = 1; // Assume current cell is a peak until proven otherwise
+
+            // Check UP neighbor (only if not on the top edge: i > 0)
+            if (i > 0 && matrix[i - 1][j] >= current) {
+                isPeak = 0;
+            }
+
+            // Check DOWN neighbor (only if not on the bottom edge: i < r - 1)
+            if (i < r - 1 && matrix[i + 1][j] >= current) {
+                isPeak = 0;
+            }
+
+            // Check LEFT neighbor (only if not on the left edge: j > 0)
+            if (j > 0 && matrix[i][j - 1] >= current) {
+                isPeak = 0;
+            }
+
+            // Check RIGHT neighbor (only if not on the right edge: j < c - 1)
+            if (j < c - 1 && matrix[i][j + 1] >= current) {
+                isPeak = 0;
+            }
+
+            // If no existing neighbor was greater than or equal to current, count it
+            if (isPeak == 1) {
+                peakCount = peakCount + 1;
+            }
+        }
+    }
+
+    return peakCount;
+}
+
+int main() {
+    int r, c;
+
+    // Read number of rows (r) and columns (c)
+    if (scanf("%d %d", &r, &c) != 2) {
+        return 0;
+    }
+
+    // Boundary check: invalid matrix dimensions
+    if (r <= 0 || c <= 0) {
+        printf("0\n");
+        return 0;
+    }
+
+    // Create the r x c matrix and read all elements
+    long long matrix[r][c];
+    for (int i = 0; i < r; i++) {
+        for (int j = 0; j < c; j++) {
+            scanf("%lld", &matrix[i][j]);
+        }
+    }
+
+    // Call the function and print the total number of peaks
+    int result = countLocalPeaks(r, c, matrix);
+    printf("%d\n", result);
+
+    return 0;
+}
