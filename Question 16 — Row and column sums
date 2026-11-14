@@ -1,0 +1,57 @@
+#include <stdio.h>
+
+// Function to calculate and print all row sums on line 1, and all column sums on line 2
+void printRowAndColSums(int r, int c, long long matrix[r][c]) {
+    // 1. Calculate and print row sums (outer loop = rows, inner loop = columns)
+    for (int i = 0; i < r; i++) {
+        long long rowSum = 0;
+        for (int j = 0; j < c; j++) {
+            rowSum = rowSum + matrix[i][j];
+        }
+        printf("%lld", rowSum);
+        if (i < r - 1) {
+            printf(" "); // Print space between numbers, avoiding a trailing space at the end
+        }
+    }
+    printf("\n");
+
+    // 2. Calculate and print column sums (outer loop = columns, inner loop = rows)
+    for (int j = 0; j < c; j++) {
+        long long colSum = 0;
+        for (int i = 0; i < r; i++) {
+            colSum = colSum + matrix[i][j];
+        }
+        printf("%lld", colSum);
+        if (j < c - 1) {
+            printf(" "); // Print space between numbers, avoiding a trailing space at the end
+        }
+    }
+    printf("\n");
+}
+
+int main() {
+    int r, c;
+
+    // Read the number of rows (r) and columns (c)
+    if (scanf("%d %d", &r, &c) != 2) {
+        return 0;
+    }
+
+    // Boundary check: a valid matrix must have at least 1 row and 1 column
+    if (r <= 0 || c <= 0) {
+        return 0;
+    }
+
+    // Create the r x c matrix and read all elements
+    long long matrix[r][c];
+    for (int i = 0; i < r; i++) {
+        for (int j = 0; j < c; j++) {
+            scanf("%lld", &matrix[i][j]);
+        }
+    }
+
+    // Call the function to print row sums and column sums
+    printRowAndColSums(r, c, matrix);
+
+    return 0;
+}
