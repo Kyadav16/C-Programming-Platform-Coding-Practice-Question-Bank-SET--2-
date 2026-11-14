@@ -1,0 +1,22 @@
+bool isIsomorphic(char* s, char* t) {
+    // Direct-address lookup tables covering all 256 possible ASCII character values
+    unsigned char mapST[256] = {0};
+    unsigned char mapTS[256] = {0};
+
+    for (int i = 0; s[i] != '\0'; i++) {
+        unsigned char c1 = (unsigned char)s[i];
+        unsigned char c2 = (unsigned char)t[i];
+
+        // If neither character has been mapped yet, establish a bidirectional mapping
+        if (mapST[c1] == 0 && mapTS[c2] == 0) {
+            mapST[c1] = c2;
+            mapTS[c2] = c1;
+        }
+        // Otherwise, verify that the existing mappings match on both sides
+        else if (mapST[c1] != c2 || mapTS[c2] != c1) {
+            return false;
+        }
+    }
+
+    return true;
+}
