@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+// Function to calculate and return the area of a rectangle
+// Using 'long long' prevents overflow if length and width are very large numbers
+long long rectangleArea(long long length, long long width) {
+    // Safety check: a rectangle cannot have negative or zero sides
+    if (length <= 0 || width <= 0) {
+        return 0;
+    }
+
+    return length * width;
+}
+
+int main() {
+    long long length, width;
+
+    // Read length and width from the user (%lld is used for long long)
+    scanf("%lld %lld", &length, &width);
+
+    // Call the function and print the returned area
+    long long area = rectangleArea(length, width);
+    printf("%lld\n", area);
+
+    return 0;
+}
