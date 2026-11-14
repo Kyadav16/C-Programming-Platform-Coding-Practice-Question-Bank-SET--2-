@@ -1,0 +1,54 @@
+#include <stdio.h>
+
+// Helper function to find the Greatest Common Divisor (GCD)
+long long gcd(long long a, long long b) {
+    // Convert negative numbers to positive because GCD is always positive
+    if (a < 0) {
+        a = -a;
+    }
+    if (b < 0) {
+        b = -b;
+    }
+
+    // Repeat until remainder becomes 0
+    while (b != 0) {
+        long long remainder = a % b;
+        a = b;
+        b = remainder;
+    }
+
+    return a;
+}
+
+// Function to count numbers x from 1 to m where gcd(x, n) == 1
+long long countRelativelyPrime(long long n, long long m) {
+    // Boundary check: if m < 1, there are no numbers in [1, m]
+    // Also if n == 0, gcd(x, 0) is only 1 when x == 1
+    if (m < 1) {
+        return 0;
+    }
+
+    long long count = 0;
+
+    // Test every candidate x from 1 through m
+    for (long long x = 1; x <= m; x++) {
+        if (gcd(x, n) == 1) {
+            count = count + 1;
+        }
+    }
+
+    return count;
+}
+
+int main() {
+    long long n, m;
+
+    // Read n and m from the user
+    scanf("%lld %lld", &n, &m);
+
+    // Call the function and print the count
+    long long result = countRelativelyPrime(n, m);
+    printf("%lld\n", result);
+
+    return 0;
+}
