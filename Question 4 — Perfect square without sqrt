@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+// Function to return 1 if n is a perfect square, otherwise 0
+int isPerfectSquare(long long n) {
+    // Negative numbers cannot be perfect squares
+    if (n < 0) {
+        return 0;
+    }
+
+    // Test integer candidates i = 0, 1, 2, 3... while i * i <= n
+    // Using 'long long' prevents i * i from overflowing when n is large
+    for (long long i = 0; i * i <= n; i++) {
+        if (i * i == n) {
+            return 1; // Found exact square root!
+        }
+    }
+
+    return 0; // Passed n without finding an exact match
+}
+
+int main() {
+    long long n;
+
+    // Read the integer n from the user
+    scanf("%lld", &n);
+
+    // Call the function and print 1 or 0
+    int result = isPerfectSquare(n);
+    printf("%d\n", result);
+
+    return 0;
+}
