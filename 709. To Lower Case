@@ -1,0 +1,11 @@
+char* toLowerCase(char* s) {
+    for (int i = 0; s[i] != '\0'; i++) {
+        // Check if the character is an uppercase English letter ('A' to 'Z')
+        if (s[i] >= 'A' && s[i] <= 'Z') {
+            // Convert to lowercase using ASCII offset (32)
+            s[i] = s[i] + ('a' - 'A');
+        }
+    }
+
+    return s;
+}
