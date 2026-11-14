@@ -1,0 +1,54 @@
+#include <stdio.h>
+
+// Helper function to return the absolute (non-negative) value of a number
+long long absoluteValue(long long x) {
+    if (x < 0) {
+        return -x;
+    }
+    return x;
+}
+
+// Function to find the minimum absolute difference between any two distinct values
+long long findMinDifference(int n, long long arr[]) {
+    // Start by assuming the difference between the first two elements is the smallest
+    long long minDiff = absoluteValue(arr[0] - arr[1]);
+
+    // Outer loop picks the first number at index i
+    for (int i = 0; i < n; i++) {
+        // Inner loop picks the second number at index j (always after i)
+        for (int j = i + 1; j < n; j++) {
+            long long currentDiff = absoluteValue(arr[i] - arr[j]);
+
+            if (currentDiff < minDiff) {
+                minDiff = currentDiff;
+            }
+        }
+    }
+
+    return minDiff;
+}
+
+int main() {
+    int n;
+
+    // Read the number of elements n
+    scanf("%d", &n);
+
+    // Boundary check: need at least 2 elements to form a pair
+    if (n < 2) {
+        printf("0\n");
+        return 0;
+    }
+
+    // Create an array of size n and read all n integers
+    long long arr[n];
+    for (int i = 0; i < n; i++) {
+        scanf("%lld", &arr[i]);
+    }
+
+    // Call the function and print the minimum difference
+    long long result = findMinDifference(n, arr);
+    printf("%lld\n", result);
+
+    return 0;
+}
