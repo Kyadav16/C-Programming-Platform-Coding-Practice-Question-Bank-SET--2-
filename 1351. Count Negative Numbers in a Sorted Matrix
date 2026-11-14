@@ -1,0 +1,16 @@
+int countNegatives(int** grid, int gridSize, int* gridColSize) {
+    int count = 0;
+
+    // Outer loop: go through each row
+    for (int i = 0; i < gridSize; i++) {
+        // Inner loop: go through each column in that row
+        for (int j = 0; j < gridColSize[i]; j++) {
+            // Check if the current number is negative (less than 0)
+            if (grid[i][j] < 0) {
+                count = count + 1;
+            }
+        }
+    }
+
+    return count;
+}
