@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+// Function to convert totalSeconds into hours, remaining minutes, and remaining seconds
+void convertSeconds(long long totalSeconds) {
+    // Safety check: if input is negative, treat it as 0
+    if (totalSeconds < 0) {
+        totalSeconds = 0;
+    }
+
+    // 1 hour = 3600 seconds
+    long long hours = totalSeconds / 3600;
+
+    // Get the seconds left over after removing full hours
+    long long remainingSeconds = totalSeconds % 3600;
+
+    // 1 minute = 60 seconds
+    long long minutes = remainingSeconds / 60;
+
+    // Get the final leftover seconds after removing full minutes
+    long long seconds = remainingSeconds % 60;
+
+    // Print hours, minutes, and seconds separated by spaces
+    printf("%lld %lld %lld\n", hours, minutes, seconds);
+}
+
+int main() {
+    long long totalSeconds;
+
+    // Read totalSeconds from the user
+    scanf("%lld", &totalSeconds);
+
+    // Call the function to convert and print the result
+    convertSeconds(totalSeconds);
+
+    return 0;
+}
