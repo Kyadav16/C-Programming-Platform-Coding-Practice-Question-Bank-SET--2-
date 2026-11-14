@@ -1,0 +1,22 @@
+int diagonalSum(int** mat, int matSize, int* matColSize) {
+    int sum = 0;
+
+    // Loop through each row from 0 to matSize - 1
+    for (int i = 0; i < matSize; i++) {
+        // 1. Add the primary diagonal element (top-left to bottom-right)
+        sum = sum + mat[i][i];
+
+        // 2. Add the secondary diagonal element (top-right to bottom-left)
+        int secondaryCol = matSize - 1 - i;
+        sum = sum + mat[i][secondaryCol];
+    }
+
+    // If the matrix size is odd (like 3x3 or 5x5), the center element 
+    // was added twice (once in each diagonal), so subtract it once.
+    if (matSize % 2 == 1) {
+        int center = matSize / 2;
+        sum = sum - mat[center][center];
+    }
+
+    return sum;
+}
