@@ -1,0 +1,48 @@
+#include <stdio.h>
+
+// Function to check if an n x n square matrix is symmetric (matrix[i][j] == matrix[j][i])
+int isSymmetric(int n, long long matrix[n][n]) {
+    // Only check entries above the main diagonal (where j > i)
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            // Compare element (i, j) with its mirror across the diagonal (j, i)
+            if (matrix[i][j] != matrix[j][i]) {
+                return 0; // Found a mismatch -> Not symmetric
+            }
+        }
+    }
+
+    return 1; // All mirror pairs matched -> Symmetric
+}
+
+int main() {
+    int n;
+
+    // Read the size n of the square matrix
+    if (scanf("%d", &n) != 1) {
+        return 0;
+    }
+
+    // Boundary check: a non-positive matrix size cannot form a valid matrix
+    if (n <= 0) {
+        printf("NO\n");
+        return 0;
+    }
+
+    // Create the n x n matrix and read all elements
+    long long matrix[n][n];
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            scanf("%lld", &matrix[i][j]);
+        }
+    }
+
+    // Call the function and print YES or NO
+    if (isSymmetric(n, matrix)) {
+        printf("YES\n");
+    } else {
+        printf("NO\n");
+    }
+
+    return 0;
+}
